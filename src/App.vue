@@ -1,34 +1,63 @@
 <template>
   <div id="app">
-    <Navbar />
-    <ul class="habits" v-for="habit in habits" :key="habit.id">
-      <Habit :habit="habit" @increment="increment(habit)"/>
-    </ul>
+    <Navbar :totalCount="habits.filter(item => item.count > 0).length"/>
+    <Habits 
+      :habits="habits"
+      @increment="onIncrease" 
+      @decrement="onDecrease"
+      @reset="onReset"
+      @delete="onDelete"
+      @add="onAdd"
+    />
   </div>
 </template>
 
 <script>
-import Habit from './components/Habit.vue'
+import Habits from './components/Habits.vue'
 import Navbar from './components/Navbar.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    Habit,
+    Habits,
   },
   data() {
     return {
       habits: [
-        { id: 1, name: 'Reading', count: 0},
-        { id: 2, name: 'Running', count: 0},
-        { id: 3, name: 'Coding', count: 0}
+        { name: 'Reading', count: 0},
+        { name: 'Running', count: 0},
+        { name: 'Coding', count: 0}
       ]
     }
   },
   methods: {
-    increment(habit) {
-      console.log(habit)
+    onIncrease(index) {
+      this.$set(this.habits, index, { ...this.habits[index], count: ++this.habits[index].count })
+    },
+
+    onDecrease(index) {
+      const count = this.habits[index].count - 1;
+      this.$set(this.habits, index, { ...this.habits[index], count: count < 0 ? 0 : count })
+    },
+
+    onReset() {
+      const habits = this.habits.map(habit => {
+        if(habit.count !== 0) {
+          return { ...habit, count: 0 }
+        }
+        return habit
+      })
+      this.habits = habits
+    },
+
+    onDelete(index) {
+      this.$delete(this.habits, index)
+    },
+
+    onAdd(name) {
+      console.log(name)
+      this.habits.push({ name, count: 0 })
     }
   }
 }
@@ -41,11 +70,6 @@ body {
 
 #app {
   box-sizing: border-box;
-}
-
-.habits {
-  padding: 0.5em;
-  padding-top: 2em;
 }
 
 button {

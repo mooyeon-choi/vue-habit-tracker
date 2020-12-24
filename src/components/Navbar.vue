@@ -2,12 +2,12 @@
   <nav class="navbar">
     <font-awesome-icon class="navbar-logo" icon="leaf" />
     <span>Habit Tracker</span>
-    <span class="navbar-count">0</span>
+    <span class="navbar-count">{{ totalCount }}</span>
   </nav>
 </template>
 <script>
 export default {
-  
+  props: ['totalCount']
 }
 </script>
 <style>

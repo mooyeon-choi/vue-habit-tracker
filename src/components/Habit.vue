@@ -2,23 +2,19 @@
   <li class="habit">
     <span class="habit-name">{{ habit.name }}</span>
     <span class="habit-count">{{ habit.count }}</span>
-    <button class="habit-button" @click="$emit('increment', 1)">
+    <button class="habit-button" @click="$emit('increment')">
       <font-awesome-icon class="habit-button habit-increase" icon="plus-square" />
     </button>
-    <button class="habit-button">
+    <button class="habit-button" @click="$emit('decrement')">
       <font-awesome-icon class="habit-button habit-decrease" icon="minus-square" />
     </button>
-    <button class="habit-button">
+    <button class="habit-button" @click="$emit('delete')">
       <font-awesome-icon class="habit-button habit-delete" icon="trash" />
     </button>
   </li>
 </template>
 <script>
 export default {
-  model: {
-    prop: 'habit',
-    event: 'change'
-  },
   props: ['habit']
 }
 </script>
@@ -62,12 +58,4 @@ export default {
   font-size: 2rem;
   color: darkred;
 }
-
-.habits-reset {
-  font-size: 1.5rem;
-  padding: 0.2em 1em;
-  background-color: green;
-  color: white;
-}
-
 </style>

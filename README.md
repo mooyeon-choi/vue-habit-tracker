@@ -1,2 +1,24 @@
-# vue-habit-tracker
-Vue.js로 Habit tracker를 만들어보며 기본적인 사용법을 학습한 Project입니다.
+# habit-tracker
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

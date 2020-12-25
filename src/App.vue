@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar :totalCount="habits.filter(item => item.count > 0).length"/>
-    <Habits 
+    <HabitList 
       :habits="habits"
       @increment="onIncrease" 
       @decrement="onDecrease"
@@ -13,30 +13,32 @@
 </template>
 
 <script>
-import Habits from './components/Habits.vue'
+import HabitList from './components/HabitList.vue'
 import Navbar from './components/Navbar.vue'
 
 export default {
   name: 'App',
   components: {
-    Navbar,
-    Habits,
+    HabitList,
+    Navbar
   },
   data() {
     return {
       habits: [
-        { name: 'Reading', count: 0},
-        { name: 'Running', count: 0},
-        { name: 'Coding', count: 0}
+        { id: 0, name: 'Reading', count: 0},
+        { id: 1, name: 'Running', count: 0},
+        { id: 2, name: 'Coding', count: 0}
       ]
     }
   },
   methods: {
-    onIncrease(index) {
+    onIncrease(habitId) {
+      const index = this.habits.findIndex(item => item.id === habitId)
       this.$set(this.habits, index, { ...this.habits[index], count: ++this.habits[index].count })
     },
 
-    onDecrease(index) {
+    onDecrease(habitId) {
+      const index = this.habits.findIndex(item => item.id === habitId)
       const count = this.habits[index].count - 1;
       this.$set(this.habits, index, { ...this.habits[index], count: count < 0 ? 0 : count })
     },
@@ -51,13 +53,13 @@ export default {
       this.habits = habits
     },
 
-    onDelete(index) {
+    onDelete(habitId) {
+      const index = this.habits.findIndex(item => item.id === habitId)
       this.$delete(this.habits, index)
     },
 
     onAdd(name) {
-      console.log(name)
-      this.habits.push({ name, count: 0 })
+      this.habits.push({ id: Date.now(), name, count: 0 })
     }
   }
 }

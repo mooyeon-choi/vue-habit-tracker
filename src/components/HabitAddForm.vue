@@ -14,7 +14,6 @@ export default {
   methods: {
     onSubmit: function (event) {
       event.preventDefault();
-      console.log(this.name)
       this.$emit('add', this.name);
       this.name = '';
     }

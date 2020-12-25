@@ -1,29 +1,29 @@
 <template>
-  <div class="habits">
+  <div class="habit-list">
     <HabitAddForm @add="$emit('add', $event)"/>
-    <ul v-for="(habit, index) in habits" :key="index">
-      <Habit 
+    <ul v-for="habit in habits" :key="habit.id">
+      <HabitListItem 
         :habit="habit" 
-        @increment="$emit('increment', index)" 
-        @decrement="$emit('decrement', index)"
-        @delete="$emit('delete', index)"
+        @increment="$emit('increment', habit.id)" 
+        @decrement="$emit('decrement', habit.id)"
+        @delete="$emit('delete', habit.id)"
       />
-    </ul>
+      </ul>
     <button class="habits-reset" @click="$emit('reset')">
       Reset All
     </button>
   </div>
 </template>
 <script>
-import Habit from './Habit.vue'
 import HabitAddForm from './HabitAddForm.vue'
+import HabitListItem from './HabitListItem.vue'
 export default {
   props: ['habits'],
-  components: { Habit, HabitAddForm },
+  components: { HabitListItem, HabitAddForm },
 }
 </script>
 <style>
-.habits {
+.habit-list {
   padding: 0.5em;
   padding-top: 2em;
 }

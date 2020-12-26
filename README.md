@@ -26,7 +26,7 @@
 
 ### Installation
 
-* Install YARN packages
+* Install NPM packages
 
   ```bash
   npm install

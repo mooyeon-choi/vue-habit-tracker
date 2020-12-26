@@ -12,6 +12,6 @@ cd dist
 git init
 git add -A
 git commit -m 'deploy'
-git push -f git@github.com:mooyeon-choi/vue-habit-tracker.git master:gh-pages
+git push -f git@github.com:mooyeon-choi/vue-habit-tracker.git main:gh-pages
 
 cd -
